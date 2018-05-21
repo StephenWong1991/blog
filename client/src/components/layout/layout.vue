@@ -1,6 +1,9 @@
 <template>
   <div class="app-wrapper">
-    <y-header :class="{'home': menu === 'index'}" :isTransparent="menu === 'index'" @openMenus="openSideBar"></y-header>
+    <y-header :class="{'home': menu === 'index'}"
+              :isTransparent="menu === 'index'"
+              :title="blog.title"
+              @openMenus="openSideBar"></y-header>
     <!-- left -->
     <div class="app-wrapper-menus iconfont" :class="{'side-bar': isOpenSideBar}">
       <div class="sidebar-close" @click="closeSideBar">

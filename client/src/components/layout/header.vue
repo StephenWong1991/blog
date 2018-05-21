@@ -3,7 +3,7 @@
     <div class="menu menu-left" @click="back">
       <y-icon name="left" width="22" height="22" />
     </div>
-    <h1 class="menu-text" @click="gotoIndex">一天一步</h1>
+    <h1 class="menu-text" @click="gotoIndex">{{ title }}</h1>
     <div class="menu menu-right">
       <y-icon name="menu" v-if="!isTransparent" width="22" height="22" @click="openMenus"/>
       <y-icon name="menu-w" v-if="isTransparent" width="22" height="22" @click="openMenus"/>

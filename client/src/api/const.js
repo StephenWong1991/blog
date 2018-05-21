@@ -1,9 +1,9 @@
 const CONST = {
   menus: [
     { title: '首页・Home', menu: 'index', to: '/index' },
-    { title: '文章・Article', menu: 'article', to: '/article' },
-    { title: '视频・Video', menu: 'video', to: '/video' },
-    { title: '图录・Atlas', menu: 'atlas', to: '/atlas' }
+    { title: '文章・Article', menu: 'article', to: '/article' }
+    // { title: '视频・Video', menu: 'video', to: '/video' },
+    // { title: '图录・Atlas', menu: 'atlas', to: '/atlas' }
   ],
   blog: {
     title: '不笑学长',

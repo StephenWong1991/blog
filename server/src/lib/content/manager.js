@@ -11,10 +11,6 @@ const findAll = async (queryOptions = {}, options = {}) => {
   //   list = await Model.find(options).limit(queryOptions.limit).skip(queryOptions.offset).sort({ createdAt: -1 })
   // }
   list = await Model.find(options)
-  console.log('-----------------')
-  console.log(options)
-  console.log(list)
-  console.log('-----------------')
   return {
     meta: getMeta(total, list.length, queryOptions),
     list

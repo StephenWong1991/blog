@@ -115,4 +115,7 @@ export default {
       &:hover:before
         color: #13d1ae
         width: 0.1rem
+@media (max-width: 992px)
+  .menus-wrapper
+    top: 1.5rem
 </style>

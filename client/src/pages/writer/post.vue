@@ -2,31 +2,25 @@
   <y-layout menu="article">
     <div class="bm-panel post-content text-shadow">
       <div v-show="!loading">
+        <div class="post-img"></div>
         <div class="post-header">
-          <h1 class="post-title">{{ info.title }}</h1>
+          <h1 class="post-title iconfont">{{ info.title }}</h1>
           <div class="post-meta">
             <span class="post-time">发表于 {{ info.time }}</span>
             <!-- <span>{{ info.hits }} 次浏览</span> -->
-            <br class="post-tags-br"/>
             <span class="post-tags" v-for="(item, index) in info.tag">{{ item }}</span>
           </div>
+          <hr/>
         </div>
-        <div class="post-body shadow" v-html="info.html">
-        </div>
-        <div class="post-bar">
-          <div class="post-like">
-            <div class="share">
-              <svg t="1514966401073" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1881" xmlns:xlink="http://www.w3.org/1999/xlink" width="36" height="36">
-                <path d="M896 927.954H128c-17.673 0-32-14.327-32-32v-320c0-8.836 7.163-16 16-16s16 7.164 16 16v304c0 8.837 7.163 16 16 16h736c8.837 0 16-7.163 16-16v-304c0-8.837 7.164-16 16-16 8.837 0 16 7.163 16 16v320c0 17.673-14.327 32-32 32zM524.167 741.953c6.248 6.248 6.248 16.379 0 22.627s-16.379 6.248-22.628 0c-6.248-6.248-6.248-16.379 0-22.627 6.249-6.249 16.38-6.249 22.628 0z m-12.021-491.036c8.836 0 16 7.163 16 16l0.707 373.156c0 8.837-7.163 16-16 16s-16-7.164-16-16l-0.707-373.156c0-8.836 7.164-16 16-16z m181.02 58.371L523.46 139.582c-6.248-6.248-16.379-6.248-22.627 0L331.834 308.581c-6.248 6.248-16.379 6.248-22.627 0-6.248-6.248-6.248-16.379 0-22.627l180.312-180.312c12.497-12.497 32.758-12.497 45.255 0l181.019 181.019c6.248 6.248 6.248 16.379 0 22.627-6.248 6.248-16.379 6.248-22.627 0z" p-id="10813"></path>
-              </svg>
-            </div>
+        <div class="post-body shadow">
+          <div v-html="info.html"></div>
+          <div class="post-bar">
+            <span class="post-like">
+              <div class="post-like-case">
+                <i class="post-heart"></i>
+              </div>
+            </span>
           </div>
-          <router-link tag="a" class="name" :to="'/plan/' + info.category.link">
-            {{ info.category.title }}
-          </router-link>
-          <router-link tag="a" class="plan" :to="'/plan/' + info.category.link">
-            {{ info.category.desc }}
-          </router-link>
         </div>
       </div>
     </div>
@@ -120,9 +114,14 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+.post-img
+  width: 100%
+  height: 4rem
+  background: url(http://localhost:3000/i/5af550ad3214e24a59a468fd) no-repeat
+  background-size: cover
 .post-header
   background-color: #fff
-  padding: 3% 4% 2%
+  padding: 3% 0 2%
   color: #222
   .post-title
     color: #333
@@ -133,6 +132,7 @@ export default {
     display: block
     font-size: .14rem
     margin-top: .1rem
+    margin-bottom: .2rem
     color: #7f8c8d
     span
       margin-right: 0.15rem
@@ -152,12 +152,9 @@ export default {
 .post-body
   margin-top: 0.5rem
   border-radius: 10px
-  // padding: 0% 4% 2%
-  padding: 0.2rem
+  padding: 0.25rem
   .markdown-text
-    // border-top: 1px dashed #ddd
     font-size: .16rem
-    // color: #293846
     color: #000000
     line-height: 1.7
     word-break: break-all
@@ -186,8 +183,6 @@ export default {
       margin-top: 0.4rem
       margin-bottom: 0.1rem
     p
-      // margin-bottom: 0.3rem
-      // margin-top: 0.3rem
       margin-bottom: 0.18rem
       margin-top: 0.18rem
       text-indent: 2em
@@ -259,7 +254,6 @@ export default {
       border: 0
       border-top: 1px dashed #ddd
     img
-      // margin: 0.3rem auto
       margin: 0.15rem auto
       max-width: 100%
       display: block
@@ -270,38 +264,50 @@ export default {
   padding: 2% 4%
   background-color: #fff
   text-align: center
-/*  border-top: 1px dashed #e3e3e3*/
   .post-like
-    width: 100%
-    height: 1.1rem
-    position: relative
-    &:before
-      content: ''
-      display: block
-      border-top: 1px dashed #ddd
+    display: block
+    margin: 0 auto
+    width: .6rem
+    height: .6rem
+    line-height: .6rem
+    cursor: pointer
+    text-align: center
+    border-radius: .12rem
+    background-color: #ff6661
+    .post-like-case
       width: 100%
-      position: absolute
-      left: 0
-      right: 0
-      margin-top: 0.36rem
-    .share
-      width: 0.7rem
-      height: 0.7rem
-      border-radius: 0.7rem
-      background-color: #fff
-      position: absolute
-      border: 1px dashed #ddd
-      left: 50%
-      margin-left: -0.35rem
-      cursor: pointer
-      color: #2ecc40
-      transition: all .3s linear
+      height: 100%
+      transition: .5s all linear
       &:hover
-        background-color: #2ecc40
-        color: #fff
-      svg
-        margin: 0.16rem auto
-        fill: currentColor
+        transform: rotateY(720deg)
+      .post-heart
+        display: inline-block
+        vertical-align: middle
+        width: .2rem
+        height: .2rem
+        position: relative
+        background: -webkit-linear-gradient(left top, #ffcdcb 50% , #ffe9e9 50%)
+        transform: rotate(-45deg)
+        &::after
+          content: ''
+          position: absolute
+          z-index: -1
+          left: 0
+          top: -0.09rem
+          width: .2rem
+          height: .1rem
+          background: #ffcdcb
+          border-radius: 50px 50px 0 0
+        &::before
+          content: ''
+          position: absolute
+          z-index: -1
+          left: 0.19rem
+          top: 0
+          width: .1rem
+          height: .2rem
+          background: #ffe9e9
+          border-radius: 0 50px 50px 0
   .name
     color: #293846
     font-weight: 700

@@ -2,7 +2,6 @@
   <div class="input" :class="{'fill-input': !title}">
     <label v-if="title" class="title"><span v-if="required">＊</span>{{ title }}:</label>
     <div class="form-control" v-if="type === 'text'">
-      <!-- <input type="text" :value="value" ref="input" @input="$emit('input', $event.target.value)" :placeholder="placeholder"> -->
       <input type="text" :value="value" ref="input" @input="$emit('input', $event.target.value)" :placeholder="placeholder">
     </div>
     <div class="form-upload" v-if="type === 'upload'" :style="'width: ' + (width ? width : '79%') + '; padding-bottom:' + (height ? height : '0.4rem')">
@@ -14,11 +13,6 @@
     </div>
     <div class="form-radio" v-if="type === 'radio'">
       <span class="radio-btn" v-for="(item, index) in list" :class="{'active': item.value === value}" :key="index" @click="changeRadio(item.value)">{{ item.name }}</span>
-    </div>
-    <div class="form-control" v-if="type === 'select'">
-      <select>
-        <option v-for="(item, index) in list" :value="item.value" :key="index">{{ item.name }}</option>
-      </select>
     </div>
   </div>
 </template>

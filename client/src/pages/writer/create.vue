@@ -4,7 +4,7 @@
       <h1>写文章</h1>
       <y-input name="title" v-model="title" placeholder="请输入标题" value="category"></y-input>
       <!-- <y-input name="tag" v-model="tag" placeholder="请输入标签，逗号分隔"></y-input> -->
-      <y-input type="select" v-model="category" :list="categoryList"></y-input>
+      <y-input type="radio" :value="category" :list="categoryList" @change="changeRadio"></y-input>
       <y-editor name="content" placeholder="编辑器" ref="editor"></y-editor>
       <y-button @submit="submit"></y-button>
     </div>
@@ -46,7 +46,7 @@ export default {
       this.$refs.editor.set('')
       this.getArticleList()
     },
-    changeCategory (value) {
+    changeRadio (value) {
       this.category = value
     },
     getArticleList () {
@@ -70,27 +70,25 @@ export default {
       })
     },
     submit () {
-      console.log(this.title)
-      console.log(this.category)
-      // this.markdown = this.$refs.editor.get()
-      // if (this._validate()) {
-      //   this._insertContent({
-      //     category: this.category,
-      //     title: this.title,
-      //     // tag: this.tag,
-      //     markdown: this.markdown
-      //   }, (error, data) => {
-      //     if (error) {
-      //       return this.errorTip(error)
-      //     }
-      //     if (data.status.code === 0) {
-      //       this.successTip('创建成功')
-      //       setTimeout(() => {
-      //         this.$router.back()
-      //       }, 1000)
-      //     }
-      //   })
-      // }
+      this.markdown = this.$refs.editor.get()
+      if (this._validate()) {
+        this._insertContent({
+          category: this.category,
+          title: this.title,
+          // tag: this.tag,
+          markdown: this.markdown
+        }, (error, data) => {
+          if (error) {
+            return this.errorTip(error)
+          }
+          if (data.status.code === 0) {
+            this.successTip('创建成功')
+            setTimeout(() => {
+              this.$router.back()
+            }, 1000)
+          }
+        })
+      }
     },
     _validate () {
       if (!this.title) {

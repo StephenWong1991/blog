@@ -86,7 +86,7 @@ export default {
     textarea
       height: 1.2rem
       border: 1px dashed #e3e3e3
-      background-image: url(../../assets/text_cover.png)
+      // background-image: url(../../assets/text_cover.png)
       background-repeat: no-repeat
       background-position: right bottom
       background-size: 100px

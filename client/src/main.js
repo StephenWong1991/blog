@@ -3,8 +3,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import fastclick from 'fastclick'
-// import { device, consoleGame } from 'common/js/util'
-import { device } from 'common/js/util'
+import { device, consoleGame } from 'common/js/util'
 
 import Notifications from 'vue-notification'
 
@@ -56,7 +55,7 @@ if (NODE_ENV === 'production') {
   })
 }
 
-// consoleGame()
+consoleGame()
 
 /* eslint-disable no-new */
 new Vue({

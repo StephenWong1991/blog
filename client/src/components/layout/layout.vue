@@ -15,7 +15,7 @@
       <y-menus :menu="menu" @clickMenus="closeSideBar"></y-menus>
       <div class="logo-title text-shadow">
         <span>copyright©</span>
-        <a target="_blank" class="font-text" :href="blog.weibo">不笑学长</a>
+        <a target="_blank" class="font-text" :href="blog.weibo">{{blog.title}}</a>
         <a class="font-text" @click="gotoLogin" href="javascript:;">个人博客</a>
       </div>
     </div>

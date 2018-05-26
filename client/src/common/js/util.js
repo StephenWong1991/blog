@@ -131,7 +131,7 @@ export function consoleGame () {
     return
   }
   let me = 19
-  let Star = () => {
+  let Star = function () {
     this.x = 0
     this.speed = 1
     this.y = 0

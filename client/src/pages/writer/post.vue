@@ -24,9 +24,12 @@
         </div>
       </div>
     </div>
-    <y-post-near v-show="!loading" :next="next" :prev="prev"></y-post-near>
+    <!-- <y-post-near v-show="!loading" :next="next" :prev="prev"></y-post-near>
     <y-comment-list v-if="false"></y-comment-list>
-    <y-comment-create v-if="false"></y-comment-create>
+    <y-comment-create v-if="false"></y-comment-create> -->
+    <y-post-near :next="next" :prev="prev"></y-post-near>
+    <y-comment-create></y-comment-create>
+    <y-comment-list></y-comment-list>
   </y-layout>
 </template>
 
@@ -119,6 +122,24 @@ export default {
   height: 4rem
   background: url(http://localhost:3000/i/5af550ad3214e24a59a468fd) no-repeat
   background-size: cover
+  position: relative
+  transition: .5s all linear
+  &:before
+    content: ''
+    display: block
+    position: absolute
+    left: 0
+    top: 0
+    width: 0
+    height: 100%
+    z-index: 0
+    background-image: url(../index/image/mask.png)
+    transition: .5s all linear
+  &:hover
+    filter: sepia(65%)
+    border-radius: 0.2rem
+  &:hover::before
+    width: 100%
 .post-header
   background-color: #fff
   padding: 3% 0 2%

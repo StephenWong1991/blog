@@ -1,5 +1,6 @@
 <template>
   <div class="bm-panel content-comment-creat shadow">
+    <h4 class="content-comment-title iconfont">評論 Commit</h4>
     <div class="content-comment-creat-meta">
       <div class="content-comment-creat-name">
         <input class="form-control" v-model="name" type="text" name="name" placeholder="昵称[111.207.128.*]">
@@ -68,6 +69,14 @@ export default {
 .content-comment-creat
   margin-top: 0.4rem
   padding: 2%
+  border-radius: 10px
+  .content-comment-title
+    width: 5rem
+    padding-bottom: .2rem
+    margin-bottom: .25rem
+    font-size: .2rem
+    border-bottom: 1px solid #b1b1b1
+
   .content-comment-creat-meta
     font-size: 0
     margin-bottom: 0.15rem

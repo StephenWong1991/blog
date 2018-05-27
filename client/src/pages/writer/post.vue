@@ -123,7 +123,7 @@ export default {
   background: url(http://localhost:3000/i/5af550ad3214e24a59a468fd) no-repeat
   background-size: cover
   position: relative
-  transition: .5s all linear
+  transition: 3s all linear
   &:before
     content: ''
     display: block
@@ -134,7 +134,7 @@ export default {
     height: 100%
     z-index: 0
     background-image: url(../index/image/mask.png)
-    transition: .5s all linear
+    transition: 3s all linear
   &:hover
     filter: sepia(65%)
     border-radius: 0.2rem
@@ -300,7 +300,7 @@ export default {
       height: 100%
       transition: .5s all linear
       &:hover
-        transform: rotateY(720deg)
+        transform: rotateY(720deg) scale(1.3)
       .post-heart
         display: inline-block
         vertical-align: middle

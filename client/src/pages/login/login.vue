@@ -5,13 +5,13 @@
         <h1 class="iconfont">登陆 Sign in</h1>
         <div class="input-group">
           <div class="input-item">
-            <input type="text" v-model="email" placeholder="用户名" class="input-name shadow"/>
+            <input type="text" v-model="email" placeholder="用户名" class="input-name form-input shadow"/>
           </div>
           <div class="input-item">
-            <input type="password" v-model="password" placeholder="密码" class="shadow"/>
+            <input type="password" v-model="password" placeholder="密码" class="form-input shadow"/>
           </div>
         </div>
-        <div class="btn iconfont" @click="submit">登录</div>
+        <div class="btn form-btn iconfont" @click="submit">登录</div>
       </div>
     </div>
   </y-layout>
@@ -118,11 +118,6 @@ export default {
           width: 100%
           height: 0.4rem
           margin-bottom: 0.27rem
-          padding: 0.04rem 0
-          border: 1px solid #c8c8c8
-          border-radius: 6px
-          background-color: #ffffff
-          vertical-align: middle
           text-indent 2em
         .input-icon
           position: absolute
@@ -138,20 +133,8 @@ export default {
     .btn
       display: block
       margin: 0 auto
-      width: 1rem
-      height: 0.4rem
-      text-align: center
-      line-height: 0.4rem
-      padding: 0.06rem 0.18rem
-      font-size: 18px
+      padding: .06rem .18rem
       font-weight: bold
-      border-radius: 4px
-      cursor: pointer
-      color: #fff
-      background-color: #ff5f52
-      border-color: #ff5f52
-      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)
-      letter-spacing: 2px
       &:hover
       &:focus
         color: #fff

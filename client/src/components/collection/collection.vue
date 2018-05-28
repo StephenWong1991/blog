@@ -21,8 +21,7 @@
       <ul>
         <li class="content text-left"
             v-for="(item, index) in articleList"
-            :key="index"
-            @click="toArticle(item._id)">
+            :key="index">
           <router-link  :to="'/p/'+ item._id">
             <y-crown></y-crown>
             <span>{{ item.title }}</span>
@@ -181,6 +180,8 @@ export default {
       padding: 0 0.5rem
       position: relative
       cursor: pointer
+      a
+        display: block
       &:hover
         background: #082038
         color: #ffffff

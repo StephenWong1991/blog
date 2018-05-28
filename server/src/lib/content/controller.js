@@ -46,9 +46,9 @@ const findAllByCategory = async (req, res, next) => {
     let options = {
       category: categoryInfo.name
     }
-    if (!req.headers['authorization']) {
-      options.status = 'published'
-    }
+    // if (!req.headers['authorization']) {
+    //   options.status = 'published'
+    // }
     const result = await contentManager.findAll(getFromReq(req.query, CONTENT_LIMIT_DEFAULT), options)
     result.list = result.list.map(item => {
       return {

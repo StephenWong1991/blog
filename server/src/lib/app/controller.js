@@ -1,3 +1,6 @@
+/**
+ * 应用 api(未用到)
+ */
 import appManager from './manager'
 import { getFromReq } from '../util/pagination'
 import { formatResult, handlerCustomError } from '../util/format'

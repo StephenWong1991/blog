@@ -3,8 +3,8 @@
     <div class="bm-panel plan-content shadow text-shadow">
       <h1>合集</h1>
       <y-input title="名称" name="name" v-model="name" placeholder="请输入合集名称" required></y-input>
-      <y-input title="描述" name="desc" v-model="desc" placeholder="请输入一句话介绍"></y-input>
-      <y-input type="radio" title="篇幅" name="length" :value="length" :list="list" @change="changeRadio"></y-input>
+      <y-input title="描述" name="desc" v-model="desc" placeholder="请输入一句话介绍" required></y-input>
+      <y-input type="radio" title="篇幅" name="length" :value="length" :list="list" @change="changeRadio" required></y-input>
       <y-input type="upload" required @upload="uploadImage" title="封面" name="cover" :value="coverUrl" :height="coverHeight"></y-input>
       <y-button @submit="submit"></y-button>
     </div>
@@ -30,11 +30,11 @@ export default {
   },
   data () {
     return {
-      name: null,
-      desc: null, // ****
-      length: lengthList[0].value,
+      name: null, // 类别名称
+      desc: null, // 类别描述
+      length: lengthList[0].value, // 合集篇幅
+      cover: null, // 封面图片id
       list: lengthList,
-      cover: null,
       coverUrl: null,
       coverHeight: 300 / 673 * 100 + '%'
     }
@@ -90,7 +90,11 @@ export default {
     _validate () {
       if (!this.name) {
         this.warnTip('请输入名称')
-        return false
+        return
+      }
+      if (!this.desc) {
+        this.warnTip('请输入描述')
+        return
       }
       if (!this.cover) {
         this.warnTip('请上传封面')

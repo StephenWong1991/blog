@@ -1,8 +1,10 @@
 <template>
   <y-layout menu="article">
     <div class="content-home">
-      <y-button class="iconfont" :text="'创建合集'" @submit="toPage('/article/create')"></y-button>
-      <y-button class="iconfont" :text="'写博文'" @submit="toPage('/article/editPost')"></y-button>
+
+      <!-- need auth -->
+      <y-button v-if="isAuth" class="iconfont" :text="'创建合集'" @submit="toPage('/article/create')"></y-button>
+      <y-button v-if="isAuth" class="iconfont" :text="'写博文'" @submit="toPage('/article/editPost')"></y-button>
 
       <div class="article-header">
         <h2 class="iconfont">文章推荐</h2>
@@ -44,6 +46,8 @@
 import YLayout from 'components/layout/layout'
 import YCollection from 'components/collection/collection'
 import YButton from 'components/button/button'
+import storage from 'common/js/storage.js'
+import CONST from 'api/const'
 import api from 'api'
 import { dateFormat } from 'common/js/util'
 
@@ -57,19 +61,22 @@ export default {
   },
   data () {
     return {
+      isAuth: false,
       list: [],
       shortList: [],
       longList: [],
-      // articleList1: [],
-      // articleList2: []
       category1: null,
       category2: null
     }
   },
   activated () {
-    this.getArticleList()
+    this.initDate()
   },
   methods: {
+    initDate () {
+      this.isAuth = !!storage.get(CONST.STORAGE_AUTH_TOKEN)
+      this.getArticleList()
+    },
     // 获取全部合集(系列)
     getArticleList () {
       this._getArticleList((error, data) => {
@@ -92,11 +99,9 @@ export default {
         // 短篇合集
         this.shortList = this.list.filter(item => item.length === 'shortCollection')
         this.category1 = this.shortList[0]._id
-        // this.articleList1 = await this.getContentByCategory(this.shortList[0]._id)
         // 长篇合集
         this.longList = this.list.filter(item => item.length === 'longCollection')
         this.category2 = this.longList[0]._id
-        // this.articleList2 = await this.getContentByCategory(this.longList[0]._id)
       })
     },
     // // 获取文章标题
@@ -191,7 +196,7 @@ export default {
         bottom: 0
   .content-article-box
     width: 9.5rem
-    // margin: 0 auto
+    margin: 0 auto
     .content-article
       width: 4.5rem
       height: 2.6rem
@@ -207,6 +212,10 @@ export default {
         height: 2.3rem
         position: relative
         background-size: 100% 100%
+        background-position: center center
+        transition: .3s all linear
+        &:hover
+          background-size: 120% 120%
         .article-title
           position: absolute
           width: 2.8rem

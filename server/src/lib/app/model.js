@@ -1,6 +1,5 @@
 import { mongoose } from '../../middleware/db'
 
-// 一种以文件形式存储的数据库模型骨架，不具备数据库的操作能力
 const Schema = mongoose.Schema
 
 const AppSchema = new Schema({

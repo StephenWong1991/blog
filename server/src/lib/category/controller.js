@@ -1,3 +1,6 @@
+/**
+ * 文章系列分类
+ */
 import categoryManager from './manager'
 import { getFromReq } from '../util/pagination'
 import { formatResult, handlerCustomError } from '../util/format'
@@ -13,36 +16,31 @@ const findAll = async (req, res, next) => {
 }
 
 const insert = async (req, res, next) => {
-  // const name = (req.body.name || '').trim()
-  // const pathname = (req.body.pathname || '').trim()
-  // const desc = (req.body.desc || '').trim()
   // const weight = parseInt(req.body.weight) || 1
-  // const cover = (req.body.cover || '').trim()
-  // const createdByID = req.user.id
-  // if (!name) {
-  //   next(handlerCustomError(102001, '名称不能为空'))
-  // }
-  // if (pathname && !/^[a-zA-Z0-9-_]+$/.test(pathname)) {
-  //   next(handlerCustomError(102004, '请输入合法的自定义链接'))
-  // }
-  // if (!createdByID) {
-  //   next(handlerCustomError(102005, '非法用户操作'))
-  // }
 
-  const name = req.body.name
-  const pathname = req.body.pathname
-  const cover = req.body.cover
-  const length = req.body.length
+  const name = (req.body.name || '').trim()
+  const pathname = (req.body.pathname || '').trim()
+  const cover = (req.body.cover || '').trim()
+  const length = (req.body.length || 'shortCollection').trim() // 默认短篇小说
   const createdByID = req.user.id
 
+  if (!name) {
+    next(handlerCustomError(102001, '名称不能为空'))
+  }
+  if (pathname && !/^[a-zA-Z0-9-_]+$/.test(pathname)) {
+    next(handlerCustomError(102004, '请输入合法的自定义链接'))
+  }
+  if (!createdByID) {
+    next(handlerCustomError(102005, '非法用户操作'))
+  }
+
   try {
-    // if (pathname) {
-    //   const getCategoryByPathname = await categoryManager.getByPathname(pathname)
-    //   if (getCategoryByPathname) {
-    //     return next(handlerCustomError(102006, '自定义链接重复'))
-    //   }
-    // }
-    // const result = await categoryManager.insert({ name, pathname, desc, weight, cover, createdByID })
+    if (pathname) {
+      const getCategoryByPathname = await categoryManager.getByPathname(pathname)
+      if (getCategoryByPathname) {
+        return next(handlerCustomError(102006, '自定义链接重复'))
+      }
+    }
     const result = await categoryManager.insert({
       name,
       pathname,

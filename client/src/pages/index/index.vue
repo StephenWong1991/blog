@@ -31,7 +31,6 @@ export default {
     initData () {
       this.initBgImage()
       this.sayAWord()
-      setInterval(this.sayAWord, 5000)
     },
     sayAWord () {
       this.switchTip = true
@@ -39,6 +38,7 @@ export default {
         this.tip = `“${tips[Math.random() * tips.length >> 0]}”`
         this.switchTip = false
       }, 500)
+      setTimeout(this.sayAWord, 5000)
     },
     initBgImage () {
       this.imageUrl = 'https://source.unsplash.com/random'

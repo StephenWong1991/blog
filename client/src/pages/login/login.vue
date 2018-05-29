@@ -2,7 +2,7 @@
   <y-layout menu="login">
     <div class="content-home">
       <div class="content-login-box shadow">
-        <h1 class="iconfont">登陆 Sign in</h1>
+        <h1 class="content-login-title iconfont">登陆 Sign in</h1>
         <div class="input-group">
           <div class="input-item">
             <input type="text" v-model="email" placeholder="用户名" class="input-name form-input shadow"/>
@@ -11,7 +11,7 @@
             <input type="password" v-model="password" placeholder="密码" class="form-input shadow"/>
           </div>
         </div>
-        <div class="btn form-btn iconfont" @click="submit">登录</div>
+        <button class="btn form-btn iconfont" @click="submit">登录</button>
       </div>
     </div>
   </y-layout>
@@ -53,10 +53,10 @@ export default {
         this.warnTip('您的账号不能为空')
         return false
       }
-      // if (!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.email)) {
-      //   this.warnTip('您的账号格式错误')
-      //   return false
-      // }
+      if (!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.email)) {
+        this.warnTip('您的账号格式错误')
+        return false
+      }
       if (!this.password || !this.password.trim().length) {
         this.warnTip('您的密码不能为空')
         return false
@@ -92,21 +92,20 @@ export default {
   height: 100%
   .content-login-box
     width: 5rem
-    padding: 0.04rem 0.25rem 0.4rem
-    background-color: #fff
+    padding: .04rem .25rem .4rem
+    background-color: #ffffff
     position: absolute
-    top: 40%
+    top: 50%
     left: 50%
-    margin-left: -2.5rem
-    margin-top: -1.91rem
+    transform: translate(-50%, -50%)
     border-radius: 6px
-    h1
-      margin: 0 auto 0.25rem
-      height: 0.5rem
+    .content-login-title
+      margin: 0 auto .25rem
+      height: .5rem
       color: #000000
-      font-size: 20px
+      font-size: .2rem
       letter-spacing: 4px
-      line-height: 0.5rem
+      line-height: .5rem
       border-bottom: 1px solid #b1b1b1
     .input-group
       margin: 0 auto
@@ -116,30 +115,24 @@ export default {
         margin-bottom: 0
         input
           width: 100%
-          height: 0.4rem
-          margin-bottom: 0.27rem
-          text-indent 2em
+          height: .4rem
+          margin-bottom: .27rem
+          text-indent: 1em
         .input-icon
           position: absolute
-          top: 0.15rem
-          left: 0.11rem
-          font-size: 18px
+          top: .15rem
+          left: .11rem
+          font-size: .18rem
           color: #969696
           display: block
-          width: 0.18rem
-          height: 0.2rem
+          width: .18rem
+          height: .2rem
           background-size: 18px 20px
           background-repeat: no-repeat
     .btn
       display: block
       margin: 0 auto
-      padding: .06rem .18rem
       font-weight: bold
-      &:hover
-      &:focus
-        color: #fff
-        background-color: #ff5f52
-        border-color: #ff5f52
 @media (max-width:768px)
   .content-home
     .content-login-box

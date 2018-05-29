@@ -1,7 +1,7 @@
 <template>
   <y-layout menu="article">
     <div class="bm-panel plan-content shadow text-shadow">
-      <h1>合集</h1>
+      <h1 class="plan-content-title">合集</h1>
       <y-input title="名称" name="name" v-model="name" placeholder="请输入合集名称" required></y-input>
       <y-input title="描述" name="desc" v-model="desc" placeholder="请输入一句话介绍" required></y-input>
       <y-input type="radio" title="篇幅" name="length" :value="length" :list="list" @change="changeRadio" required></y-input>
@@ -147,13 +147,13 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus">
 .plan-content
   padding: 3% 4% 4%
-  h1
+  .plan-content-title
     letter-spacing: 2px
-    font-size: 0.40rem
+    font-size: .4rem
     padding-bottom: 3%
     margin-bottom: 4%
-    border-bottom: 1px dashed #ddd
-    color: rgba(0,0,0,0.75)
+    border-bottom: 1px dashed #dddddd
+    color: rgba(0, 0, 0, 0.75)
     text-align: center
   .input
     padding-right: 8%
@@ -162,7 +162,7 @@ export default {
     margin: 0 auto
 @media (max-width: 768px)
   .plan-content
-    margin-top: 0.5rem
+    margin-top: .5rem
     margin-bottom: 0
     .input
       padding-right: 0

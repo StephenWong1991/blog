@@ -52,7 +52,7 @@ export default {
 .content-home
   position: relative
   height: 100%
-  padding: 0.5rem 0
+  padding: .5rem 0
   .content-video-box
     width: 9.5rem
     margin: 0 auto
@@ -60,12 +60,12 @@ export default {
       width: 4.6rem
       height: 3.7rem
       float: left
-      margin-bottom: 0.3rem
-      background: #FFFFFF
+      margin-bottom: .3rem
+      background: #ffffff
       border-radius: 3px
       overflow: hidden
       &:nth-child(2n)
-        margin-left: 0.3rem
+        margin-left: .3rem
       .video-poster
         width: 100%
         height: 2.55rem
@@ -73,10 +73,10 @@ export default {
         background: url(../../assets/400102213_wx.jpg) no-repeat
         background-size: contain
       p
-        padding: 0.2rem 0.2rem 0
-        font-size 0.2rem
+        padding: .2rem .2rem 0
+        font-size .2rem
       .video-mark
-        padding-top: 0.15rem
-        font-size 0.16rem
+        padding-top: .15rem
+        font-size .16rem
         color: #848484
 </style>

@@ -16,34 +16,27 @@ const findAll = async (req, res, next) => {
 }
 
 const insert = async (req, res, next) => {
-  // const weight = parseInt(req.body.weight) || 1
-
   const name = (req.body.name || '').trim()
-  const pathname = (req.body.pathname || '').trim()
+  const desc = (req.body.desc || '').trim()
+  const length = (req.body.length || 'shortCollection').trim()
   const cover = (req.body.cover || '').trim()
-  const length = (req.body.length || 'shortCollection').trim() // 默认短篇小说
+  // const weight = parseInt(req.body.weight) || 1
   const createdByID = req.user.id
 
   if (!name) {
     next(handlerCustomError(102001, '名称不能为空'))
   }
-  if (pathname && !/^[a-zA-Z0-9-_]+$/.test(pathname)) {
-    next(handlerCustomError(102004, '请输入合法的自定义链接'))
+  if (!desc) {
+    next(handlerCustomError(102002, '描述不能为空'))
   }
   if (!createdByID) {
     next(handlerCustomError(102005, '非法用户操作'))
   }
 
   try {
-    if (pathname) {
-      const getCategoryByPathname = await categoryManager.getByPathname(pathname)
-      if (getCategoryByPathname) {
-        return next(handlerCustomError(102006, '自定义链接重复'))
-      }
-    }
     const result = await categoryManager.insert({
       name,
-      pathname,
+      desc,
       cover,
       length,
       createdByID

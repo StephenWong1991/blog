@@ -23,8 +23,6 @@ const getByName = async (name) => {
   return result
 }
 
-// const getByPathname = async (pathname) => {
-//   const result = await Model.findOne({ pathname })
 const getByPathname = async (_id) => {
   const result = await Model.findOne({ _id })
   return result

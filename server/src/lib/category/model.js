@@ -7,7 +7,6 @@ const CategorySchema = new Schema({
   desc: { type: String, required: true }, // 类别描述
   length: { type: String, default: null, required: true }, // 合集篇幅
   cover: { type: String, default: null, required: true }, // 封面图片id
-  // pathname: { type: String, default: '' }, // 自定义链接
   // weight: { type: Number, default: 0 }, // 权重
   createdByID: { type: Schema.Types.ObjectId, required: true }
 }, {

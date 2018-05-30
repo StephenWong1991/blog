@@ -2,12 +2,12 @@
   <y-layout menu="article">
     <div class="bm-panel post-content text-shadow">
       <div v-show="!loading">
-        <div class="post-img"></div>
+        <div class="post-img" :style="'background-image: url(' + info.category.cover + ')'"></div>
         <div class="post-header">
           <h1 class="post-title iconfont">{{ info.title }}</h1>
           <div class="post-meta">
             <span class="post-time">发表于 {{ info.time }}</span>
-            <!-- <span>{{ info.hits }} 次浏览</span> -->
+            <span>{{ info.hits }} 次浏览</span>
             <span class="post-tags" v-for="(item, index) in info.tag">{{ item }}</span>
           </div>
           <hr/>
@@ -81,21 +81,22 @@ export default {
           return this.errorTip(error)
         }
         if (data.status.code === 0) {
-          // data.result.content.html = data.result.content.html.replace(/src="\/images/img, 'src="http://v1.yitianyibu.com/images')
           data.result.content.html = data.result.content.html.replace(/src="\/images/img, 'src="http://localhost:3000/images')
-          // data.result.content.html = data.result.content.html.replace(/src="\/i\//img, 'src="http://api.yitianyibu.com/i/')
           data.result.content.html = data.result.content.html.replace(/src="\/i\//img, 'src="http://localhost:3000/i/')
+          if (/^[0-9a-f]{24}$/.test(data.result.category.cover)) {
+            data.result.category.cover = `${api.host}/i/${data.result.category.cover}`
+          }
           this.info = {
             title: data.result.content.title || null,
             html: data.result.content.html || null,
             hits: data.result.content.hits || null,
             time: dateFormat(data.result.content.createdAt, 'yyyy-MM-dd'),
+            // tag: data.result.content.tag || [],
             category: {
               title: data.result.category.name || null,
               desc: data.result.category.desc || null,
-              link: data.result.category.pathname || data.result.category._id || null
-            },
-            tag: data.result.content.tag || []
+              cover: data.result.category.cover || null
+            }
           }
           this.prev = (data.result.near && data.result.near.prev) || null
           this.next = (data.result.near && data.result.near.next) || null
@@ -120,12 +121,12 @@ export default {
 .post-img
   width: 100%
   height: 4rem
-  background: url(http://localhost:3000/i/5af550ad3214e24a59a468fd) no-repeat
+  background-repeat: no-repeat
   background-size: cover
   position: relative
   transition: 3s all linear
   &:before
-    content: ''
+    content: ""
     display: block
     position: absolute
     left: 0
@@ -137,7 +138,6 @@ export default {
     transition: 3s all linear
   &:hover
     filter: sepia(65%)
-    border-radius: 0.2rem
   &:hover::before
     width: 100%
 .post-header

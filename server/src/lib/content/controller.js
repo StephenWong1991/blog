@@ -54,7 +54,7 @@ const findAllByCategory = async (req, res, next) => {
       return {
         _id: item._id,
         createdAt: item.createdAt,
-        // hits: item.hits,
+        hits: item.hits,
         title: item.title
         // status: item.status
       }
@@ -81,8 +81,8 @@ const getById = async (req, res, next) => {
     result.content = {
       title: _content.title,
       html: _content.html,
-      createdAt: _content.createdAt
-      // hits: _content.hits
+      createdAt: _content.createdAt,
+      hits: _content.hits
     }
     if (_content.tag && _content.tag.length > 0) {
       let _tag = []
@@ -93,13 +93,12 @@ const getById = async (req, res, next) => {
       result.content.tag = _tag
     }
     if (_content.category) {
-      // let _category = await categoryManager.getById(_content.category)
       let _category = await categoryManager.getByName(_content.category)
       result.category = {
         _id: _category._id,
         name: _category.name,
         desc: _category.desc,
-        pathname: _category.pathname
+        cover: _category.cover
       }
     }
     // result.near = await contentManager.getNearByCreatedAt(result.content.createdAt)

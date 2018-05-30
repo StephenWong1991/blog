@@ -1,9 +1,8 @@
 <template>
-  <y-layout menu="plan">
+  <y-layout menu="article">
     <div class="bm-panel plan-content shadow text-shadow">
       <h1>写文章</h1>
       <y-input name="title" v-model="title" placeholder="请输入标题" value="category"></y-input>
-      <!-- <y-input name="tag" v-model="tag" placeholder="请输入标签，逗号分隔"></y-input> -->
       <y-input type="radio" :value="category" :list="categoryList" @change="changeRadio"></y-input>
       <y-editor name="content" placeholder="编辑器" ref="editor"></y-editor>
       <y-button @submit="submit"></y-button>
@@ -13,26 +12,24 @@
 
 <script>
 import YLayout from 'components/layout/layout'
-import YButton from 'components/button/button'
 import YInput from 'components/input/input'
 import YEditor from 'components/editor/editor'
+import YButton from 'components/button/button'
 import api from 'api'
 
 export default {
   components: {
     YLayout,
-    YButton,
     YInput,
-    YEditor
+    YEditor,
+    YButton
   },
   data () {
     return {
-      loading: false,
       title: null,
-      tag: null,
-      markdown: null,
+      categoryList: [],
       category: null,
-      categoryList: []
+      markdown: null
     }
   },
   activated () {
@@ -41,7 +38,6 @@ export default {
   methods: {
     clearData () {
       this.title = null
-      this.tag = null
       this.markdown = null
       this.$refs.editor.set('')
       this.getArticleList()
@@ -61,21 +57,12 @@ export default {
         this.category = this.categoryList[0].value
       })
     },
-    // 获取全部合集
-    _getArticleList (callback) {
-      api.getCategory().then(data => {
-        callback(null, data)
-      }).catch(error => {
-        callback(error.status.message)
-      })
-    },
     submit () {
       this.markdown = this.$refs.editor.get()
       if (this._validate()) {
         this._insertContent({
-          category: this.category,
           title: this.title,
-          // tag: this.tag,
+          category: this.category,
           markdown: this.markdown
         }, (error, data) => {
           if (error) {
@@ -100,6 +87,13 @@ export default {
         return false
       }
       return true
+    },
+    _getArticleList (callback) {
+      api.getCategory().then(data => {
+        callback(null, data)
+      }).catch(error => {
+        callback(error.status.message)
+      })
     },
     _insertContent (option, callback) {
       api.insertContent(option).then(data => {

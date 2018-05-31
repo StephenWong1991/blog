@@ -153,7 +153,7 @@ export default {
     display: block
     font-size: .14rem
     margin-top: .1rem
-    margin-bottom: .2rem
+    margin-bottom: .1rem
     color: #7f8c8d
     span
       margin-right: 0.15rem

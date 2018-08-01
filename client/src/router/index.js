@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
 import Index from 'pages/index/index'
 import Login from 'pages/login/login'
 import Video from 'pages/video/video'
@@ -13,20 +12,54 @@ import Post from 'pages/writer/post'
 Vue.use(Router)
 
 let routes = [
-  { path: '/', component: Index },
-  { path: '/index', redirect: '/' },
-  { path: '/login', component: Login },
-  { path: '/video', component: Video },
-  // 文章页
-  { path: '/article', component: Article },
-  // 创建合集
-  { path: '/article/create', component: ArticleCreate },
-  // 写博文
-  { path: '/article/editPost', component: PostCreate },
-  // 文章详情
-  { path: '/p/:id', component: Post },
-  { path: '/article/more', component: More },
-  { path: '*', redirect: '/' }
+  {
+    name: '首页',
+    path: '/',
+    component: Index
+  },
+  {
+    path: '/index',
+    redirect: '/'
+  },
+  {
+    name: '登陆',
+    path: '/login',
+    component: Login
+  },
+  {
+    name: '视频',
+    path: '/video',
+    component: Video
+  },
+  {
+    name: '文章',
+    path: '/article',
+    component: Article
+  },
+  {
+    name: '创建合集',
+    path: '/article/create',
+    component: ArticleCreate
+  },
+  {
+    name: '写博文',
+    path: '/article/editPost',
+    component: PostCreate
+  },
+  {
+    name: '文章详情',
+    path: '/p/:id',
+    component: Post
+  },
+  {
+    name: '更多',
+    path: '/article/more',
+    component: More
+  },
+  {
+    path: '*',
+    redirect: '/'
+  }
 ]
 
 export default new Router({

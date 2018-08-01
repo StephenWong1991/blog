@@ -22,14 +22,21 @@ import Notifications from 'vue-notification'
  * https://github.com/hinesboy/mavonEditor
  */
 import mavonEditor from 'mavon-editor'
+import storage from 'common/js/storage.js'
+import CONST from 'api/const'
 import 'common/stylus/index.styl'
 import 'mavon-editor/dist/css/index.css'
+
+const NODE_ENV = process.env.NODE_ENV || 'development'
+const forbidEnter = [
+  '/article/create',
+  '/article/editPost'
+]
 
 Vue.use(mavonEditor)
 Vue.use(Notifications)
 // 设置为 false 以阻止 vue 在启动时生成生产提示
 Vue.config.productionTip = false
-
 
 // 根据ua 处理移动端适配
 if (device.isPC()) {
@@ -50,20 +57,28 @@ setTimeout(() => {
 fastclick.attach(document.body)
 
 // 百度统计
-// const NODE_ENV = process.env.NODE_ENV || 'development'
-// if (NODE_ENV === 'production') {
-//   const hmSite = '362807aa3174bef7d10276019cb0d733'
-//   let hmSrc = `https://hm.baidu.com/hm.js?${hmSite}`
-//   let _hmt = []
-//   let hm = document.createElement('script')
-//   hm.src = hmSrc
-//   let s = document.getElementsByTagName('script')[0]
-//   s.parentNode.insertBefore(hm, s)
-//   router.beforeEach((to, from, next) => {
-//     _hmt.push(['_trackPageview', to.path])
-//     next()
-//   })
-// }
+if (NODE_ENV === 'production') {
+  const hmSite = '362807aa3174bef7d10276019cb0d733'
+  let hmSrc = `https://hm.baidu.com/hm.js?${hmSite}`
+  let _hmt = []
+  let hm = document.createElement('script')
+  hm.src = hmSrc
+  let s = document.getElementsByTagName('script')[0]
+  s.parentNode.insertBefore(hm, s)
+
+  router.beforeEach((to, from, next) => {
+    _hmt.push(['_trackPageview', to.path])
+    next()
+  })
+} else {
+  router.beforeEach((to, from, next) => {
+    if (forbidEnter.includes(to.path) && !storage.get(CONST.STORAGE_AUTH_TOKEN)) {
+      next('/')
+    } else {
+      next()
+    }
+  })
+}
 
 /* eslint-disable no-new */
 new Vue({

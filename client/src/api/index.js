@@ -6,7 +6,6 @@ const NODE_ENV = process.env.NODE_ENV || 'development'
 
 const host = {
   'production': 'http://api.yitianyibu.com',
-  // 'development': 'http://api.yitianyibu.com'
   'development': 'http://localhost:3000'
 }[NODE_ENV]
 
@@ -96,7 +95,6 @@ const API = {
       'Content-Type': 'multipart/form-data'
     })
   },
-  // ************ add ws ************
   getCategory (options = {}) {
     const url = `${host}/api/category`
     return this._get(url, options)
@@ -114,7 +112,6 @@ const API = {
     const url = `${host}/api/content`
     return this._post(url, options)
   },
-  // ************
   getContentByCategory (id, options = {}) {
     const url = `${host}/api/content/by/category/${id}`
     return this._get(url, options)
